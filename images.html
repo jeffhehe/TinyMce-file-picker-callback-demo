@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Images</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function () {
+            //Add click event listener to img elements to send image url back to TinyMce
+            $('body').on('click', 'img', function (e) {
+                var imgSrc = $(this).prop('src');
+                var imgAlt = $(this).prop('alt');
+                //send image url back to TinyMce
+                window.parent.postMessage({
+                    mceAction: 'customAction',
+                    src: imgSrc,
+                    alt: imgAlt
+                });
+                //close external page and return to TinyMce
+                window.parent.postMessage({
+                    mceAction: 'close'
+                });
+            });
+        })
+
+
+    </script>
+</head>
+
+<body>
+    <ul>
+        <li><img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+                alt="Google Logo"/></li>
+        <li>
+            <img src="https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RWCZER?ver=1433&q=90&m=6&h=157&w=279&b=%23FFFFFFFF&l=f&o=t&aim=true"
+                alt="Microsoft Logo"/>
+        </li>
+        <li>
+            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Logo.png" alt="GitHub Logo"/>
+        </li>
+    </ul>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>TinyMCE6 file_picker_callback() Demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.5.1/tinymce.min.js"></script>
+  <script>
+    tinyMCE.init({
+      selector: 'textarea.tinymce',
+      plugins: [
+        'image'
+      ],
+      toolbar: 'image',
+      file_picker_callback: function (callback, value, meta) {
+        var fileBrowseUrl =  "images.html";
+        //https://www.tiny.cloud/docs/tinymce/6/urldialog
+        tinyMCE.activeEditor.windowManager.openUrl({
+          url: fileBrowseUrl,
+          title: 'Server File Browser',
+          width: 800,
+          height: 600,
+          resizable: "yes",
+          onMessage: function (api, data) {
+            callback(data.src, {alt: data.alt});
+          }
+        })
+      }
+    });
+
+
+  </script>
+
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>TinyMCE6 file_picker_callback() Demo</h1>
+        <div class="form-group">
+          <label for="editor">TinyMCE Editor</label>
+          <textarea id="editor" class="form-control tinymce"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
